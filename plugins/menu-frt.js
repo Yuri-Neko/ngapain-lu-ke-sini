@@ -1,4 +1,4 @@
-:import axios from 'axios'
+import axios from 'axios'
 import FormData from 'form-data'
 import fetch from 'node-fetch'
 import fs from 'fs'
@@ -26,8 +26,69 @@ ${usedPrefix + command} cecan
 ${usedPrefix + command} pinterest |wibu
 
 *List:*
-• 3d-gradient
-• zettai
+• ${usedPrefix + command} alkitabsearch
+• ${usedPrefix + command} animeidsearch
+• ${usedPrefix + command} asupanloli
+• ${usedPrefix + command} asupan
+• ${usedPrefix + command} china
+• ${usedPrefix + command} hijab
+• ${usedPrefix + command} indon
+• ${usedPrefix + command} japan
+• ${usedPrefix + command} korea
+• ${usedPrefix + command} ahegao
+• ${usedPrefix + command} anal
+• ${usedPrefix + command} ass
+• ${usedPrefix + command} bdsm
+• ${usedPrefix + command} blowjob
+• ${usedPrefix + command} cuckold
+• ${usedPrefix + command} cum
+• ${usedPrefix + command} ecchi
+• ${usedPrefix + command} ero
+• ${usedPrefix + command} eroyuri
+• ${usedPrefix + command} feet
+• ${usedPrefix + command} femdom
+• ${usedPrefix + command} foot
+• ${usedPrefix + command} futanari
+• ${usedPrefix + command} gangbang
+• ${usedPrefix + command} glasses
+• ${usedPrefix + command} hentai
+• ${usedPrefix + command} hntgifs
+• ${usedPrefix + command} holo
+• ${usedPrefix + command} holoero
+• ${usedPrefix + command} jahy
+• ${usedPrefix + command} kuni
+• ${usedPrefix + command} loli2
+• ${usedPrefix + command} loli
+• ${usedPrefix + command} manga
+• ${usedPrefix + command} masturbation
+• ${usedPrefix + command} milf
+• ${usedPrefix + command} neko
+• ${usedPrefix + command} orgy
+• ${usedPrefix + command} panties
+• ${usedPrefix + command} pussy
+• ${usedPrefix + command} tentacles
+• ${usedPrefix + command} thighs
+• ${usedPrefix + command} tits
+• ${usedPrefix + command} trap
+• ${usedPrefix + command} waifu
+• ${usedPrefix + command} yaoi
+• ${usedPrefix + command} yuri
+• ${usedPrefix + command} zettairyouiki
+• ${usedPrefix + command} asupan
+• ${usedPrefix + command} pinterest
+• ${usedPrefix + command} pinterests
+• ${usedPrefix + command} black
+• ${usedPrefix + command} bp
+• ${usedPrefix + command} breakwall
+• ${usedPrefix + command} circuit
+• ${usedPrefix + command} fiction
+• ${usedPrefix + command} glitch
+• ${usedPrefix + command} matrix
+• ${usedPrefix + command} neon
+• ${usedPrefix + command} neonlight
+• ${usedPrefix + command} neonpl
+• ${usedPrefix + command} toxic
+• ${usedPrefix + command} wanted
 `
 await conn.sendButton(m.chat, caption, wm, null, [
                 ['Menu', `${usedPrefix}menu`]
@@ -164,10 +225,10 @@ case 'asupan':
         let eb = await fetch(`https://restapi.frteam.xyz/pinterestSearch?q=${one}&apikey=Hrbot`)
         let ec = await eb.json()
     let ed = ec.data
-	let ee = Object.values(ed).map((v, index) => ({
+	let ee = Object.keys(ed).map((v, index) => ({
 		title: `Data ke ${1 + index}`,
 		description: 'By ' + wm,
-		rowId: usedPrefix + 'get ' + v.url
+		rowId: usedPrefix + 'get ' + ed[v]
 	}))
 	let ef = {
 		buttonText: `☂️ ${args[0]} Search Disini ☂️`,
@@ -192,6 +253,8 @@ case 'toxic':
             break
             case 'wanted':
             let q = m.quoted ? m.quoted : m
+  let mime = (q.msg || q).mimetype || ''
+  if (!mime) throw 'No media found'
   let media = await q.download()
   let isTele = /image\/(png|jpe?g|gif)|video\/mp4/.test(mime)
   let link = await (isTele ? uploadImage : uploadFile)(media)
