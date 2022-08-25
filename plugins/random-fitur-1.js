@@ -209,21 +209,17 @@ if (command == 'doujindesusearch') {
 if (!text) throw `Contoh penggunaan ${usedPrefix}${command} samsung`
 let f = await fetch(`https://bx-hunter.herokuapp.com/api/anime/doujindesusearch?query=${text}&apikey=W46QBtQGOhiqfiClaxHqyAaIR`)
 let xx = await f.json()
-let v = xx.result
-let teks = v.map(v => {
-return `
-*title:* ${v.title}
-*score:* ${v.score}
-*type:* ${v.type}
-*status:* ${v.status}
-*link:* ${v.link}
-*thumb:* ${v.thumb}
-      `.trim()
-  }).filter(v => v).join('\n\n▣═━–〈 *SEARCH* 〉–━═▣\n\n')
-  //m.reply(teks)
-  await conn.sendButton(m.chat, teks, wm, v[0].thumb, [
-                ['Search!', `${usedPrefix + command}`]
-            ], m, fdoc)
+	let row = Object.values(xx.result).map((v, index) => ({
+		title: index + ' ' + v.title,
+		description: '\nscore ' + v.score + '\ntype ' + v.type + '\nstatus ' + v.status + '\nlink ' + v.link + '\nthumb ' + v.thumb,
+		rowId: usedPrefix + 'get ' + v.thumb
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ Hai ${name}, Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return conn.sendListM(m.chat, button, row, m)
             
 }
 
@@ -421,9 +417,13 @@ let row = Object.keys(lis).map((v, index) => ({
 	}
 	return await conn.sendListM(m.chat, button, row, m)
 }
-
+if (command == 'sl') {
+  let res = await fetch('https://api.lolhuman.xyz/api/' + args[0] + '?apikey=' + global.lolkey + '&url=' + args[1])
+  let json = await res.json()
+  m.reply(json.result)
+	}
 }
-handler.command = handler.help = ['jadian2', 'menikah', 'metercinta', 'bertanya', 'bokep', 'kusonime', 'membucin', 'mencerpen', 'mencersex', 'asmaulhusna', 'hadistku', 'quranku', 'memeindo', 'doujindesusearch', 'doujindesudl', 'stimker', 'randommeme', 'memedarkjoke', 'beasiswa', 'apkdown', 'proxysite', 'mirrorcreator', 'ouo', 'ouoshort', 'shortlink', 'shortlink2', 'shortlink3', 'shortlink4', 'tenor']
+handler.command = handler.help = ['jadian2', 'menikah', 'metercinta', 'bertanya', 'bokep', 'kusonime', 'membucin', 'mencerpen', 'mencersex', 'asmaulhusna', 'hadistku', 'quranku', 'memeindo', 'doujindesusearch', 'doujindesudl', 'stimker', 'randommeme', 'memedarkjoke', 'beasiswa', 'apkdown', 'proxysite', 'mirrorcreator', 'ouo', 'ouoshort', 'shortlink', 'shortlink2', 'shortlink3', 'shortlink4', 'tenor', 'sl']
 handler.tags = ['random']
 
 export default handler
