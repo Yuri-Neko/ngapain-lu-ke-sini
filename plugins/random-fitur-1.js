@@ -2,7 +2,6 @@ import fetch from 'node-fetch'
 
 let toM = a => '@' + a.split('@')[0]
 let handler = async(m, { conn, groupMetadata, usedPrefix, text, args, command }) => {
-let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentMessage: {title: `${command}`}}}}
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
 let name = await conn.getName(who)
@@ -82,7 +81,7 @@ let res = await fetch(`https://yog-apikey.herokuapp.com/api/anime/kusonime?searc
   *Rilis:* ${has.released_on}
   *Deskripsi:* ${has.description}`, author, has.thumb, [
                 ['menu', `${usedPrefix}menu`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'membucin') {
@@ -91,7 +90,7 @@ let res = await fetch(`https://yog-apikey.herokuapp.com/api/bucin?apikey=YogGanz
   let has = sul.result
   await conn.sendButton(m.chat, `*Bucin:*\n${has.result}`, author, null, [
                 ['Next', `${usedPrefix + command}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'mencerpen') {
@@ -103,7 +102,7 @@ let res = await fetch(`https://yog-apikey.herokuapp.com/api/cerpen?apikey=YogGan
   *Kategori:* ${has.kategori}
   *Type:* ${has.cerpen}`, author, null, [
                 ['Next', `${usedPrefix + command}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'mencersex') {
@@ -113,7 +112,7 @@ let res = await fetch(`https://yog-apikey.herokuapp.com/api/cersex?apikey=YogGan
   await conn.sendButton(m.chat, `*Judul:* ${has.judul}
   *Cerita:* ${has.cersex}`, author, has.img, [
                 ['Next', `${usedPrefix + command}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'asmaulhusna') {
@@ -132,7 +131,7 @@ return `
   //m.reply(teks)
   await conn.sendButton(m.chat, teks, wm, null, [
                 ['Search!', `${usedPrefix + command}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
             
 }
 
@@ -152,7 +151,7 @@ let res = await fetch(`https://yog-apikey.herokuapp.com/api/muslim/hadits?kitab=
   *Indonesia:* ${ha.id}
   `, author, null, [
                 ['Next', `${usedPrefix + command}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'quranku') {
@@ -172,7 +171,7 @@ let res = await fetch(`https://yog-apikey.herokuapp.com/api/muslim/quran?surah=$
   *Tafsir:* ${x.tafsir.id.long}
   *Surah:* ${x.surah.tafsir.id}`, author, null, [
                 ['Audio', `${usedPrefix}alquransound ${x.audio.primary}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'memeindo') {
@@ -182,7 +181,7 @@ await conn.sendHydrated(m.chat, caption, wm, url, null, null, null, null, [
       ['Meme EN', usedPrefix + 'meme'],
       ['Meme ID', usedPrefix + 'memeindo'],
       ['Meme Joke', usedPrefix + 'memedarkjoke']
-    ], m, fdoc)
+    ], m, { quoted: fakes })
 }
 
 if (command == 'randommeme') {
@@ -192,7 +191,7 @@ await conn.sendHydrated(m.chat, caption, wm, url, null, null, null, null, [
       ['Meme EN', usedPrefix + 'meme'],
       ['Meme ID', usedPrefix + 'memeindo'],
       ['Darkjoke', usedPrefix + 'memedarkjoke']
-    ], m, fdoc)
+    ], m, { quoted: fakes })
 }
 
 if (command == 'memedarkjoke') {
@@ -202,14 +201,15 @@ await conn.sendHydrated(m.chat, caption, wm, url, null, null, null, null, [
       ['Meme', usedPrefix + 'randommeme'],
       ['Meme ID', usedPrefix + 'memeindo'],
       ['Darkjoke', usedPrefix + 'darkjoke']
-    ], m, fdoc)
+    ], m, { quoted: fakes })
 }
 
 if (command == 'doujindesusearch') {
 if (!text) throw `Contoh penggunaan ${usedPrefix}${command} samsung`
 let f = await fetch(`https://bx-hunter.herokuapp.com/api/anime/doujindesusearch?query=${text}&apikey=W46QBtQGOhiqfiClaxHqyAaIR`)
 let xx = await f.json()
-	let row = Object.values(xx.result).map((v, index) => ({
+let pii = xx.result
+	let row = Object.values(pii).map((v, index) => ({
 		title: index + ' ' + v.title,
 		description: '\nscore ' + v.score + '\ntype ' + v.type + '\nstatus ' + v.status + '\nlink ' + v.link + '\nthumb ' + v.thumb,
 		rowId: usedPrefix + 'get ' + v.thumb
@@ -231,7 +231,7 @@ let v = xx.result
 let teks = `*link:* ${v.link_dl}`
   await conn.sendButton(m.chat, teks, wm, null, [
                 ['Download!', `${usedPrefix}get ${v.link_dl}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
             
 }
 
@@ -260,11 +260,11 @@ if (command == 'stimker') {
             apilol + "gawrgura?apikey=" + global.lolkey,
             apilol + "bucinstick?apikey=" + global.lolkey
             ]
-            let lisn = ["🐕‍🦺 anjing,
-            "⭐ patrick,
-            "💩 amongus,
-            "😎 gawrgura,
-            "😘 bucinstick
+            let lisn = ["🐕‍🦺 anjing",
+            "⭐ patrick",
+            "💩 amongus",
+            "😎 gawrgura",
+            "😘 bucinstick"
             ]
             let row = Object.keys(lis, lisn).map((v, index) => ({
 		title: htjava + ' ' + lisn[v] + ' Sticker',
@@ -292,7 +292,7 @@ await conn.sendHydrated(m.chat, caption, wm, x.result.apk_icon, x.result.apk_lin
       ['Download', `${usedPrefix + command}`],
       ['HostApk', usedPrefix + 'hostapk'],
       ['Menu', usedPrefix + 'menu']
-    ], m, fdoc)
+    ], m, { quoted: fakes })
     await m.reply('File dikirim..')
     await conn.sendFile(m.chat, x.result.apk_link, x.result.apk_link, '', m)
 }
@@ -305,7 +305,7 @@ let x = await f.json()
 let caption = `🤠 *Country:* ${x.result}`
 await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'mirrorcreator') {
@@ -330,7 +330,7 @@ let caption = `*zippyshare:* ${x.zippyshare}
 `
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'ouo') {
@@ -342,7 +342,7 @@ let x = jsons.result
 let caption = `*Result:* ${x}`
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'ouoshort') {
@@ -354,7 +354,7 @@ let x = jsons.result
 let caption = `*Result:* ${x}`
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'shortlink') {
@@ -366,7 +366,7 @@ let x = jsons.result
 let caption = `*Result:* ${x}`
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'shortlink2') {
@@ -378,7 +378,7 @@ let x = jsons.result
 let caption = `*Result:* ${x}`
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'shortlink3') {
@@ -390,7 +390,7 @@ let x = jsons.result
 let caption = `*Result:* ${x}`
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'shortlink4') {
@@ -402,7 +402,7 @@ let x = jsons.result
 let caption = `*Result:* ${x}`
         await conn.sendButton(m.chat, caption, author, null, [
                 ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            ], m, { quoted: fakes })
 }
 
 if (command == 'tenor') {

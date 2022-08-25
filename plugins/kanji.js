@@ -12,32 +12,44 @@ kanji
 words
 reading`
 if (!args[1]) throw `Masukkan teks atau kanji`
+let tes = args[1].replaceAll(' ','').replaceAll('\n','').split('')
+let pesan = `*Result :*`
+
   if (args[0] == 'kanji') {
-  let res = await fetch(`https://kanjiapi.dev/v1/kanji/${encodeURIComponent(args[1])}`)
-  let json = await res.json()
-  let { kanji, grade, stroke_count, meanings, kun_readings, on_readings, name_readings, jlpt, unicode, heisig_en } = json
-  let pesan = `
-  「Kanji Information」
-  Kanji: ${kanji}
-  Arti: ${meanings}
-  Kun-Reading: ${kun_readings}
-  On-Reading: ${on_readings}
-  Name Reading: ${name_readings}
-  Grade: ${grade}
-  Stroke: ${stroke_count}
-  JLPT: ${jlpt}
-  Unicode: ${unicode}
-  Heisig-en: ${heisig_en}
-  `.trim()
-  conn.reply(m.chat, pesan, m)
-  }
+	for (let x of tes) {
+		let res = await fetch('https://kanjiapi.dev/v1/' + args[0] + '/' + encodeURIComponent(x))
+		let json = await res.json()
+		let { kanji, grade, stroke_count, meanings, kun_readings, on_readings, name_readings, jlpt, unicode, heisig_en } = json
+		pesan += `\n\nKanji : ${kanji}\n`
+		pesan += `Arti : ${meanings}\n`
+		pesan += `Kun-Reading : ${kun_readings}\n`
+		pesan += `On-Reading : ${on_readings}\n`
+		pesan += `Name Reading : ${name_readings}\n`
+		pesan += `grade : ${grade}, stroke : ${stroke_count}, JLPT : ${jlpt}\n`
+		pesan += `${cmenuf}`
+	}
+	await conn.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'USD',
+      amount1000: fsizedoc,
+      requestFrom: m.sender,
+      noteMessage: {
+      extendedTextMessage: {
+      text: pesan,
+      contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})
+    }
   if (args[0] == 'words') {
-  let res = await fetch('https://kanjiapi.dev/v1/' + args[0] + '/' + encodeURIComponent(args[1]))
+  let res = await fetch('https://kanjiapi.dev/v1/' + args[0] + '/' + encodeURIComponent(tes))
   let json = await res.json()
+  for (let i = 0; i < json.length; i++) {
 	let row = Object.values(json).map((v, index) => ({
-		title: index + ' ' + v.variants[0].written,
-		description: '\nWritten ' + v.variants[0].written + '\nPronounced ' + v.variants[0].pronounced + '\nMeanings ' + (Array.from(v.meanings[0].glosses)),
-		rowId: usedPrefix + 'ttp ' + v.variants[0].written
+		title: index + ' ' + v.variants[i].written,
+		description: '\nWritten ' + v.variants[i].written + '\nPronounced ' + v.variants[i].pronounced + '\nMeanings ' + (Array.from(v.meanings[i].glosses)),
+		rowId: usedPrefix + 'tts ' + v.variants[i].written
 	}))
 	let button = {
 		buttonText: `☂️ ${command} Search Disini ☂️`,
@@ -46,18 +58,31 @@ if (!args[1]) throw `Masukkan teks atau kanji`
 	}
 	return conn.sendListM(m.chat, button, row, m)
 	}
-	if (args[0] == 'reading') {
-  let res = await await fetch('https://kanjiapi.dev/v1/' + args[0] + '/' + encodeURIComponent(args[1]))
-  let json = await res.json()
-  let { reading, main_kanji, name_kanji } = json
-  let pesan = `
-  「Kanji Information」
-  reading: ${reading}
-  main_kanji: ${main_kanji}
-  name_kanji: ${name_kanji}
-  `.trim()
-  conn.reply(m.chat, pesan, m)
-  }
+	}
+  if (args[0] == 'reading') {
+	for (let x of tes) {
+		let res = await fetch('https://kanjiapi.dev/v1/' + args[0] + '/' + encodeURIComponent(x))
+		let json = await res.json()
+		let { reading, main_kanji, name_kanji } = json
+		pesan += `\n\nReading : ${reading}\n`
+		pesan += `Main Kanji : ${main_kanji}\n`
+		pesan += `Name Kanji : ${name_kanji}\n`
+		pesan += `${cmenuf}`
+	}
+	await conn.relayMessage(m.chat,  {
+    requestPaymentMessage: {
+      currencyCodeIso4217: 'USD',
+      amount1000: fsizedoc,
+      requestFrom: m.sender,
+      noteMessage: {
+      extendedTextMessage: {
+      text: pesan,
+      contextInfo: {
+      mentionedJid: [m.sender],
+      externalAdReply: {
+      showAdAttribution: true
+      }}}}}}, {})
+    }
 }
 handler.help = ['kanji'].map(v => v + ' <kanji>')
 handler.tags = ['internet']

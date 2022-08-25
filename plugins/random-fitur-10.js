@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import fs from 'fs'
-
+import nhentai from 'nhentai-node-api'
 let handler = async(m, { conn, groupMetadata, usedPrefix, text, args, command }) => {
 
 // Fake 🤥
@@ -134,8 +134,9 @@ await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
 }
 
 if (command == 'avatar') {
-let av = ["https://crafatar.com/avatars/", "https://crafatar.com/renders/head/", "https://crafatar.com/renders/body/", "https://crafatar.com/skins/", "https://crafatar.com/capes/"]
+if (!text) throw `Contoh:\n${usedPrefix + command} 853c80ef3c3749fdaa49938b674adae6`
     let nm = ["🪄 avatars", "🗿 head", "🦧 body", "🥷 skins", "🐦 capes"]
+    let av = ["https://crafatar.com/avatars/", "https://crafatar.com/renders/head/", "https://crafatar.com/renders/body/", "https://crafatar.com/skins/", "https://crafatar.com/capes/"]
     
 	let row = Object.keys(av, nm).map((v, index) => ({
 		title: nm[v],
@@ -155,10 +156,17 @@ if (!text) throw `Contoh:\n${usedPrefix + command} megumin`
 let res = await fetch(`https://imsea.herokuapp.com/api/1?q=${text}`)
 let json = await res.json()
 let ran = json.results
-await conn.sendButton(m.chat, `*Result:*
-  ${ran.image_name}`, wm, ran.getRandom(), [
-                ['Next', `${usedPrefix + command} ${text}`]
-            ], m, fdoc)
+  let row = Object.keys(ran, json).map((v, index) => ({
+		title: '💬 ' + json.image_name,
+		description: '💭 *Nickname* ' + json.image_name + '🔗 *Link* ' + ran[v],
+		rowId: usedPrefix + 'get ' + ran[v]
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 
 if (command == 'iqrax') {
@@ -265,17 +273,40 @@ if (command == 'karakter') {
   if (!text) throw `Masukkan query!`
   let res = await fetch(`https://api.jikan.moe/v3/search/character?q=${text}`)
   let json = await res.json()
-  let { name, alternative_names, url, image_url, type } = json.results[0]
-let charaingfo = `💬 *Name:* ${name}
-💭 *Nickname:* ${alternative_names}
-🔗 *Link*: ${url}
-👤 *Character Type*: ${type}`
-  await conn.sendFile(m.chat, image_url, '', charaingfo, m)
+  let kar = json.results
+  let row = Object.values(kar).map((v, index) => ({
+		title: '💬 ' + v.name,
+		description: '\n💭 *Nickname* ' + v.alternative_names + '\n🔗 *Link* ' + v.url + '\n👤 *Character Type* ' + v.type + '\n*Image* ' + v.image_url,
+		rowId: usedPrefix + 'get ' + v.url
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 
+if (command == 'nhentais') {
+  if (!text) throw `Masukkan query!`
+  
+  let res = await nhentai.search('metamorphosis', 'popular-week', 1)
+  let row = Object.values(res).map((v, index) => ({
+		title: '💬 ' + v.title,
+		description: '\n💭 *id* ' + v.id + '\n💭 *language* ' + v.language + '\n💭 *thumbnail* ' + v.thumbnail,
+		rowId: usedPrefix + 'get ' + v.thumbnail
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
+	
+}
 
 }
-handler.command = handler.help = ['cqr', 'catboys', 'animals', 'nekos', 'avatar', 'lmsea', 'iqrax', 'juzammax', 'hadistx', 'alquranx', 'tafsirsurahx', 'karakter']
+handler.command = handler.help = ['nhentais', 'cqr', 'catboys', 'animals', 'nekos', 'avatar', 'lmsea', 'iqrax', 'juzammax', 'hadistx', 'alquranx', 'tafsirsurahx', 'karakter']
 handler.tags = ['random']
 
 export default handler
