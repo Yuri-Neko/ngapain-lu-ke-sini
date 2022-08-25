@@ -12,7 +12,7 @@ let urut = text.split`|`
 if (command == 'nhentai') {
 if (!args[0]) throw `Contoh penggunaan ${usedPrefix}${command} 344253`
 try {
-  let gas = await fetch(`https://api.lolhuman.xyz/api/nhentai/${args[0]}?apikey=bukanitucuy14315195`)
+  let gas = await fetch(`https://api.lolhuman.xyz/api/nhentai/${args[0]}?apikey=${global.lolkey}`)
     let json = await gas.json()
     let hasil = json.result.image
 	let row = Object.keys(hasil).map((v, index) => ({
