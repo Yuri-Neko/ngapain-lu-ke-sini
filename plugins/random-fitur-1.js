@@ -236,49 +236,47 @@ let teks = `*link:* ${v.link_dl}`
 }
 
 if (command == 'beasiswa') {
-let f = await fetch(`https://api.lolhuman.xyz/api/indbeasiswa?apikey=${global.lolkey}`)
-let xx = await f.json()
-let v = xx.result
-let teks = v.map(v => {
-return `
-🤠 *Nama:* ${v.title}
-*Link:* ${v.link}
-      `.trim()
-  }).filter(v => v).join('\n\n▣═━–〈 *SEARCH* 〉–━═▣\n\n')
-  //m.reply(teks)
-  await conn.sendButton(m.chat, teks, wm, null, [
-                ['Search!', `${usedPrefix + command}`]
-            ], m, fdoc)
+            let gas = await fetch(`https://api.lolhuman.xyz/api/indbeasiswa?apikey=${global.lolkey}`)
+    let json = await gas.json()
+    let hasil = json.results
+	let row = Object.values(hasil).map((v, index) => ({
+		title: '📌 ' + v.title,
+		description: '\n*Judul:* ' + v.title + '\n*Link:* ' + v.link,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 
 if (command == 'stimker') {
-if (!text) throw `Contoh penggunaan ${usedPrefix}${command} anjing
-
-*List:*
-• anjing
-• patrick
-• amongus
-• gawrgura
-• bucinstick`
-
-let linknye = `https://api.lolhuman.xyz/api/sticker/${text}?apikey=${global.lolkey}`
-await conn.sendFile(m.chat, linknye, 'sticker.webp', '', m, null, { fileLength: fsizedoc, contextInfo: {
-          externalAdReply :{
-          showAdAttribution: true,
-    mediaUrl: sig,
-    mediaType: 2,
-    description: wm, 
-    title: '👋 Hai, ' + name + ' ' + ucapan,
-    body: botdate,
-    thumbnail: await(await fetch(pp)).buffer(),
-    sourceUrl: sgc
-     }}
-  })
-
-await conn.sendButton(m.chat, `*Mau Lagi Gak?*
-Pencet di bawah bang ☺️`, author, null, [
-                ['Next', `${usedPrefix}${command} ${text}`]
-            ], m, fdoc)
+            let apilol = "https://api.lolhuman.xyz/api/sticker/"
+            let lis = [apilol + "anjing?apikey=" + global.lolkey,
+            apilol + "patrick?apikey=" + global.lolkey,
+            apilol + "amongus?apikey=" + global.lolkey,
+            apilol + "gawrgura?apikey=" + global.lolkey,
+            apilol + "bucinstick?apikey=" + global.lolkey
+            ]
+            let lisn = ["🐕‍🦺 anjing,
+            "⭐ patrick,
+            "💩 amongus,
+            "😎 gawrgura,
+            "😘 bucinstick
+            ]
+            let row = Object.keys(lis, lisn).map((v, index) => ({
+		title: htjava + ' ' + lisn[v] + ' Sticker',
+		description: 'By ' + wm,
+		rowId: usedPrefix + 'fetchsticker ' + lis[v] + ' wsf'
+	}))
+	let button = {
+		buttonText: `☂️ Tema Disini ☂️`,
+		description: `⚡ Silakan pilih tema di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 
 if (command == 'apkdown') {
@@ -317,11 +315,17 @@ if (!args[0]) throw `Contoh penggunaan ${usedPrefix}${command} https://www.mirro
 let jsons = await f.json()
 let x = jsons.result
 let caption = `*zippyshare:* ${x.zippyshare}
+
 *gofileio:* ${x.gofileio}
+
 *userscloud:* ${x.userscloud}
+
 *racaty:* ${x.racaty}
+
 *googledrive:* ${x.googledrive}
+
 *dropapk:* ${x.dropapk}
+
 *videobinco:* ${x.videobinco}
 `
         await conn.sendButton(m.chat, caption, author, null, [

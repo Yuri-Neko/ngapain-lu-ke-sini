@@ -134,48 +134,20 @@ await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
 }
 
 if (command == 'avatar') {
-if (!text) throw `Contoh:\n${usedPrefix + command} uuid\n*Cth:* ${usedPrefix + command} 853c80ef3c3749fdaa49938b674adae6`
-let res = `https://crafatar.com/avatars/${text}`
-await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
-  ${command}`, wm, res, [
-                ['Get Picture', `${usedPrefix}get ${res}`]
-            ], m, fdoc)
-}
-
-if (command == 'avatar2') {
-if (!text) throw `Contoh:\n${usedPrefix + command} uuid\n*Cth:* ${usedPrefix + command} 853c80ef3c3749fdaa49938b674adae6`
-let res = `https://crafatar.com/renders/head/${text}`
-await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
-  ${command}`, wm, res, [
-                ['Get Picture', `${usedPrefix}get ${res}`]
-            ], m, fdoc)
-}
-
-if (command == 'avatar3') {
-if (!text) throw `Contoh:\n${usedPrefix + command} uuid\n*Cth:* ${usedPrefix + command} 853c80ef3c3749fdaa49938b674adae6`
-let res = `https://crafatar.com/renders/body/${text}`
-await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
-  ${command}`, wm, res, [
-                ['Get Picture', `${usedPrefix}get ${res}`]
-            ], m, fdoc)
-}
-
-if (command == 'avatar4') {
-if (!text) throw `Contoh:\n${usedPrefix + command} uuid\n*Cth:* ${usedPrefix + command} 853c80ef3c3749fdaa49938b674adae6`
-let res = `https://crafatar.com/skins/${text}`
-await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
-  ${command}`, wm, res, [
-                ['Get Picture', `${usedPrefix}get ${res}`]
-            ], m, fdoc)
-}
-
-if (command == 'avatar5') {
-if (!text) throw `Contoh:\n${usedPrefix + command} uuid\n*Cth:* ${usedPrefix + command} 853c80ef3c3749fdaa49938b674adae6`
-let res = `https://crafatar.com/capes/${text}`
-await conn.sendButton(m.chat, `*Silahkan pilih di bawah:*
-  ${command}`, wm, res, [
-                ['Get Picture', `${usedPrefix}get ${res}`]
-            ], m, fdoc)
+let av = ["https://crafatar.com/avatars/", "https://crafatar.com/renders/head/", "https://crafatar.com/renders/body/", "https://crafatar.com/skins/", "https://crafatar.com/capes/"]
+    let nm = ["🪄 avatars", "🗿 head", "🦧 body", "🥷 skins", "🐦 capes"]
+    
+	let row = Object.keys(av, nm).map((v, index) => ({
+		title: nm[v],
+		description: 'By: ' + wm,
+		rowId: usedPrefix + 'get ' + av[v] + args[0]
+	}))
+	let button = {
+		buttonText: `☂️ Avatar Disini ☂️`,
+		description: `⚡ Silakan pilih Avatar di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 
 if (command == 'lmsea') {
@@ -303,7 +275,7 @@ let charaingfo = `💬 *Name:* ${name}
 
 
 }
-handler.command = handler.help = ['cqr', 'catboys', 'animals', 'nekos', 'avatar', 'avatar2', 'avatar3', 'avatar4', 'avatar5', 'lmsea', 'iqrax', 'juzammax', 'hadistx', 'alquranx', 'tafsirsurahx', 'karakter']
+handler.command = handler.help = ['cqr', 'catboys', 'animals', 'nekos', 'avatar', 'lmsea', 'iqrax', 'juzammax', 'hadistx', 'alquranx', 'tafsirsurahx', 'karakter']
 handler.tags = ['random']
 
 export default handler

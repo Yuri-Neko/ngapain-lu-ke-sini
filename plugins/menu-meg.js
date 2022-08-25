@@ -55,10 +55,11 @@ switch (template) {
             if (!one) throw `Contoh penggunaan ${usedPrefix + command} ${args[0]} |query`
         let bb = await fetch('https://megayaa.herokuapp.com/api/gimg?q=' + one)
         let bc = await bb.json()
-	let be = Object.keys(bc.result).map((v, index) => ({
+        let bd = bc.result
+	let be = Object.keys(bd).map((v, index) => ({
 		title: 'IMG Result ' + index,
 		description: 'By: ' + wm,
-		rowId: usedPrefix + 'get ' + v
+		rowId: usedPrefix + 'get ' + bd[v]
 	}))
 	let bf = {
 		buttonText: `☂️ ${args[0]} Search Disini ☂️`,
@@ -107,7 +108,7 @@ switch (template) {
         let cq = await bq.json()
         let qq = `${cq.result.quotes}
         
-        *By:* ${cq.result.author}
+        *By:* ${cq.result.author}`
         conn.sendButtonImg(m.chat, knimg, qq, 'Nih.jpg', 'To Sticker', '.s', fakes, adReply)
             break
             
@@ -130,8 +131,8 @@ switch (template) {
 }
 }
 }
-handler.help = ['frt <command> <teks>']
+handler.help = ['meg <command> <teks>']
 handler.tags = ['tools'] 
-handler.command = /^frt$/i
+handler.command = /^meg$/i
 export default handler
 
