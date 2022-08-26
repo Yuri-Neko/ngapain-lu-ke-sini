@@ -6,16 +6,16 @@ import moment from 'moment-timezone'
 
 /*Oᴡɴᴇʀ number*/
 global.owner = [
-  ['6282195322106', '️Oᴡɴᴇʀ One', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Two', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Three', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Four', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Five', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Six', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Seven', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Eight', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Nine', true],
-  ['6282195322106', '️Oᴡɴᴇʀ Teen', true]
+  ['6282195322106', '️One', true],
+  ['6282195322106', '️Two', true],
+  ['6282195322106', '️Three', true],
+  ['6282195322106', '️Four', true],
+  ['6282195322106', '️Five', true],
+  ['6282195322106', '️Six', true],
+  ['6282195322106', '️Seven', true],
+  ['6282195322106', '️Eight', true],
+  ['6282195322106', '️Nine', true],
+  ['6282195322106', '️Teen', true]
 ]
 global.mods = []
 global.prems = []
@@ -399,8 +399,8 @@ global.dpdf = 'application/pdf'
 global.drtf = 'text/rtf'
 
 /*Fake*/
-global.fsizedoc = '444441600'
-global.fpagedoc = '7279200'
+global.fsizedoc = '3599999996400'
+global.fpagedoc = '3599996400'
 global.thumbdoc = 'https://telegra.ph/file/6e45318d7c76f57e4a8bd.jpg'
 
 /*Hiasan*/
@@ -441,8 +441,8 @@ global.gcwangsaf = 'https://chat.whatsapp.com/Fxz8FpQ0ddr2GrEjfYkJ1E'
 
 /*Donasi*/
 global.saweria = 'https://saweria.co/wudysoft'
-global.dana = ['0887435373103']
-global.pulsa = ['082195322106']
+global.dana = '0887435373103'
+global.pulsa = '082195322106'
 global.trakteer = 'https://trakteer.id/wudysoft'
 global.paypal = 'wudysoft@mail.com'
 global.gopay = '082195322106'
