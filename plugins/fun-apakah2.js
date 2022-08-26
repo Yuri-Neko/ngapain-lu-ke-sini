@@ -11,10 +11,10 @@ if (command == 'apakah2') {
 }
 if (command == 'turu') {
 let keban = global.db.data.chats[m.chat].isBanned
-if (keban == true ) {
+if (args[0] == 'on' ) {
 keban = true
     m.reply('Bot Turu Dulu bang :>!')
-    } else if (keban == false) {
+    } else if (args[0] == 'off' ) {
     keban = false
     m.reply('Bot Udah Bangun bang :>!')
     }
