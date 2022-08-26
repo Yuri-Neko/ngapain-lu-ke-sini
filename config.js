@@ -386,6 +386,8 @@ global.sgh = 'https://github.com/AyGemuy'
 global.sgc = 'https://chat.whatsapp.com/BAs2c2UeLE8AaI806UWUvI'
 global.sdc = 'https://discord.com/wudysoft'
 global.snh = 'https://tiktok.com/@upload_file'
+global.sfb = 'https://facebook.com/'
+global.syt = 'https://youtube.com/'
 
 /*Nsfw*/
 global.optsnsfw = true
@@ -399,8 +401,8 @@ global.dpdf = 'application/pdf'
 global.drtf = 'text/rtf'
 
 /*Fake*/
-global.fsizedoc = '3599999996400'
-global.fpagedoc = '3599996400'
+global.fsizedoc = '1000000000000000000000000'
+global.fpagedoc = '1000000000000000000000000'
 global.thumbdoc = 'https://telegra.ph/file/6e45318d7c76f57e4a8bd.jpg'
 
 /*Hiasan*/
@@ -420,7 +422,7 @@ global.pmenus = '✦'
 
 global.htki = '┅────┅『'
 global.htka = '』┅────┅'
-global.lopr = 'Ⓟ'
+global.lopr = '🅟'
 global.lolm = 'Ⓛ'
 global.htjava = '⫹⫺'
 
