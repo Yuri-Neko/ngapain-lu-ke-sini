@@ -75,7 +75,7 @@ let weem = `📮 *Note:* Jika menemukan bug, error atau kesulitan dalam pengguna
                                     id: '.sc'
                                 }
                             }]
-        await conn.sendButtonGif(m.chat, cap, weem, { url: 'https://telegra.ph/file/15209657f9d4f59c7ca1e.mp4' }, btn, knimg)
+        await conn.sendButtonGif(m.chat, cap, weem, { url: global.giflogo }, btn, knimg)
         }
         if (pilih == "ke2") {
         await conn.send2ButtonDoc(m.chat, cap, weem, em.getRandom() + ' All Menu', usedPrefix + 'allmenu', em.getRandom() + ' List Menu', usedPrefix + 'menulist', fpayment, adReply)

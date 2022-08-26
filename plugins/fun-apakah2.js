@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
-let handler = async (m, { text, args, commabd }) => {
+let handler = async (m, { text, args, command }) => {
+if (command == 'apakah2') {
   if (!args[0]) throw `Use example .${command} halo`
   m.reply(`
 *Pertanyaan:* ${command} ${text}
@@ -8,8 +9,18 @@ let handler = async (m, { text, args, commabd }) => {
   mentions: m.mentionedJid
 } : {})
 }
-handler.help = ['apakah2'].map(v => v + ' <teks>')
-handler.tags = ['kerang', 'fun']
-handler.command = /^apakah2$/i
+if (command == 'turu') {
+let keban = global.db.data.chats[m.chat].isBanned
+if (keban == true ) {
+keban = true
+    m.reply('Bot Turu Dulu bang :>!')
+    } else if (keban == false) {
+    keban = false
+    m.reply('Bot Udah Bangun bang :>!')
+    }
+}
+}
+handler.help = ['apakah2', 'turu']
+handler.command = ['apakah2', 'turu']
 
 export default handler

@@ -157,8 +157,8 @@ let res = await fetch(`https://imsea.herokuapp.com/api/1?q=${text}`)
 let json = await res.json()
 let ran = json.results
   let row = Object.keys(ran, json).map((v, index) => ({
-		title: '💬 ' + json.image_name,
-		description: '💭 *Nickname* ' + json.image_name + '🔗 *Link* ' + ran[v],
+		title: index + ' Result: ' + json.image_name,
+		description: '\n💭 *Nickname* ' + json.image_name + '\n🔗 *Link* ' + ran[v],
 		rowId: usedPrefix + 'get ' + ran[v]
 	}))
 	let button = {
@@ -277,7 +277,7 @@ if (command == 'karakter') {
   let row = Object.values(kar).map((v, index) => ({
 		title: '💬 ' + v.name,
 		description: '\n💭 *Nickname* ' + v.alternative_names + '\n🔗 *Link* ' + v.url + '\n👤 *Character Type* ' + v.type + '\n*Image* ' + v.image_url,
-		rowId: usedPrefix + 'get ' + v.url
+		rowId: usedPrefix + 'get ' + v.image_url
 	}))
 	let button = {
 		buttonText: `☂️ ${command} Disini ☂️`,
@@ -290,7 +290,7 @@ if (command == 'karakter') {
 if (command == 'nhentais') {
   if (!text) throw `Masukkan query!`
   
-  let res = await nhentai.search('metamorphosis', 'popular-week', 1)
+  let res = await nhentai.search(text, 'popular-week', 1)
   let row = Object.values(res).map((v, index) => ({
 		title: '💬 ' + v.title,
 		description: '\n💭 *id* ' + v.id + '\n💭 *language* ' + v.language + '\n💭 *thumbnail* ' + v.thumbnail,

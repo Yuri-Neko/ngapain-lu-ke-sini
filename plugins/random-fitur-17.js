@@ -34,7 +34,7 @@ return m.reply('Error kan')
 if (command == 'nhentaipdf') {
 if (!text) throw 'Masukkan Kode Hentai'
 let tobat = 'https://pdf.lolhuman.xyz/download/' + text + '.pdf'
-conn.sendFile(m.chat, tobat, 'Ayo Tobat Adik Adik', '', m, fakes, adReply)
+await conn.sendMessage(m.chat, {document: { url: tobat }, mimetype: 'application/pdf', fileName: `${text}.pdf`}, {quoted:fakes})
 }
 
 }

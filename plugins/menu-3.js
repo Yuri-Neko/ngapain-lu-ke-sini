@@ -417,7 +417,7 @@ const listMessage = {
                                     id: '.sc'
                                 }
                             }]
-        await conn.sendButtonGif(m.chat, text.trim(), wm, { url: 'https://telegra.ph/file/15209657f9d4f59c7ca1e.mp4' }, btn, knimg)
+        await conn.sendButtonGif(m.chat, text.trim(), wm, { url: global.giflogo }, btn, knimg)
         }
         if (pilih == "ke2") {
         await conn.send2ButtonDoc(m.chat, text.trim(), wm, em.getRandom() + ' All Menu', _p + 'allmenu', em.getRandom() + ' List Menu', _p + 'menulist', fpayment, adReply)
