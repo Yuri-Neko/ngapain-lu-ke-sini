@@ -401,8 +401,8 @@ global.dpdf = 'application/pdf'
 global.drtf = 'text/rtf'
 
 /*Fake*/
-global.fsizedoc = '1000000000000000000000000'
-global.fpagedoc = '1000000000000000000000000'
+global.fsizedoc = '10000000000000000000000'
+global.fpagedoc = '10000000000000000000000'
 global.thumbdoc = 'https://telegra.ph/file/6e45318d7c76f57e4a8bd.jpg'
 
 /*Hiasan*/
