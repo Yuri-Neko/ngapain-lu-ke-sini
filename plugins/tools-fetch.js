@@ -11,7 +11,7 @@ let name = await conn.getName(who)
 	if (res.headers.get('content-length') > 100 * 1024 * 1024 * 1024) throw `Content-Length: ${res.headers.get('content-length')}`
 	if (!/text|json/.test(res.headers.get('content-type'))) return conn.sendFile(m.chat, url, ucapan, text, m, null, { fileName: ucapan, pageCount: fpagedoc, fileLength: fsizedoc, seconds: fsizedoc, contextInfo: {
           externalAdReply :{
-    mediaUrl: sig,
+    mediaUrl: syt,
     mediaType: 2,
     description: wm, 
     title: '👋 Hai, ' + name + ' ' + ucapan,
