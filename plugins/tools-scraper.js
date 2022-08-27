@@ -27,9 +27,11 @@ sghuser,
 sgoredl,
 shappymod,
 shappymoddl,
+shentai,
 sigdl,
 sigdl2,
 sigstalk,
+sigstalk2,
 sigstory,
 sjob,
 sjoox,
@@ -42,8 +44,11 @@ smerdekanews,
 smetronews,
 spalingmurah,
 spin,
+spinterest,
 spinterest2,
+sporno,
 squotes,
+squotesAnime,
 srandomgore,
 srandomtt,
 srexdl,
@@ -57,11 +62,13 @@ stextmakervid,
 stiktok,
 strendtwit,
 stwitter,
+swallpaper,
 swallpapercave,
 swallpapercraft,
 swallpaperhd,
 swattpad,
 swebtoons,
+swikimedia,
 swikisearch,
 szerochan,
 szippydl } from '../lib/scrape.js'
@@ -296,12 +303,13 @@ throw blum
 }
 if (args[0] == 'mediafire') {
 let teks = await smediafire(args[1])
-return conn.sendButton(m.chat, `*Result: !*
-${teks.judul}
-${teks.upload_date}
-${teks.size}
-${teks.mime}
-`, author, logo, [
+return conn.sendButton(m.chat, `*RESULT!*
+
+*judul:* ${teks.judul}
+*upload_date:* ${teks.upload_date}
+*size:* ${teks.size}
+*mime:* ${teks.mime}
+`, author, null, [
                 ['GET', usedPrefix + 'get ' + teks.link],
             ], m)
 }
@@ -404,7 +412,7 @@ let teks = await sstickersearch(args[1])
 	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'textmakervid') {
-let teks = await srandomgore(args[1], args[2])
+let teks = await stextmakervid(args[1], args[2])
 return conn.sendButton(m.chat, `*Result: !*
 ${teks.url}
 
