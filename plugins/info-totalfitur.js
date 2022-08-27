@@ -18,17 +18,7 @@ ${cmenuf}
 _Jangan di spam ntar erorr_
 (. ❛ ᴗ ❛.)
 ${cmenua}`
-conn.sendButton(m.chat, tqto, author, knimg, [['🎀 Menu', '/menu']], m, { fileLength: fsizedoc, seconds: fsizedoc, contextInfo: {
-          externalAdReply :{
-    mediaUrl: syt,
-    mediaType: 2,
-    description: wm, 
-    title: '👋 Hai, ' + name + ' ' + ucapan,
-    body: botdate,
-    thumbnail: await(await fetch(pp)).buffer(),
-    sourceUrl: sgh
-     }}
-  })
+return conn.send2ButtonLoc(m.chat, knimg, tqto, wm + '\n\n' + botdate, ' All Menu', usedPrefix + 'allmenu', ' List Menu', usedPrefix + 'menulist', m)
 }
 handler.help = ['totalfitur']
 handler.tags = ['main','info']
