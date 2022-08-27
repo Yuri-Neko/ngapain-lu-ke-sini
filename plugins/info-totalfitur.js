@@ -18,15 +18,15 @@ ${cmenuf}
 _Jangan di spam ntar erorr_
 (. ❛ ᴗ ❛.)
 ${cmenua}`
-conn.sendButton(m.chat, tqto, author, await(await fetch(hwaifu.getRandom())).buffer(), [['🎀 Menu', '/menu']], m, { fileLength: fsizedoc, seconds: fsizedoc, contextInfo: {
+conn.sendButton(m.chat, tqto, author, knimg, [['🎀 Menu', '/menu']], m, { fileLength: fsizedoc, seconds: fsizedoc, contextInfo: {
           externalAdReply :{
-    mediaUrl: sig,
+    mediaUrl: syt,
     mediaType: 2,
     description: wm, 
     title: '👋 Hai, ' + name + ' ' + ucapan,
     body: botdate,
     thumbnail: await(await fetch(pp)).buffer(),
-    sourceUrl: sig
+    sourceUrl: sgh
      }}
   })
 }

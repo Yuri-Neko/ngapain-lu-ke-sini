@@ -14,17 +14,7 @@ let name = await conn.getName(who)
     }
     let muptime = clockString(_muptime)
     let caption = `👋 Hai *${name} @${who.split("@")[0]}*,\n\n${wm}\n${htjava} *R U N T I M E* ${htjava}\n${muptime}\n`.trim()
-await conn.sendButton(m.chat, caption, author, await(await fetch(hwaifu.getRandom())).buffer(), [['🎀 Menu', '/menu']], m, { mentions: conn.parseMention(caption), fileLength: fsizedoc, seconds: fsizedoc, contextInfo: {
-          externalAdReply :{
-    mediaUrl: sig,
-    mediaType: 2,
-    description: wm, 
-    title: '👋 Hai, ' + name + ' ' + ucapan,
-    body: botdate,
-    thumbnail: await(await fetch(pp)).buffer(),
-    sourceUrl: sig
-     }}
-  })
+await conn.send2ButtonLoc(m.chat, knimg, caption, wm + '\n\n' + botdate, ' All Menu', usedPrefix + 'allmenu', ' List Menu', usedPrefix + 'menulist', m)
 }
 handler.help = ['runtime']
 handler.tags = ['info']

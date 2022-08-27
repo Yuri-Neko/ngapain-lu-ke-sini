@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-import { sticker } from '../lib/sticker.js'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -9,22 +8,18 @@ let name = await conn.getName(who)
     if (!text) throw `Penggunaan:\n${usedPrefix + command} <teks>\n\nContoh:\n${usedPrefix + command} spongebob`
     let res = await fetch(API('lolhuman', '/api/stickerwa', { query: text }, 'apikey'))
     let json = await res.json()
-    let ha = json.result[0].stickers
-    
-        let stiker = await sticker(false, ha.getRandom(), packname, author)
-        // await conn.sendFile(m.chat, stiker, '', '', m, 0, { asSticker: true })
-        await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, null, { fileLength: fsizedoc, contextInfo: {
-          externalAdReply :{
-          showAdAttribution: true,
-    mediaUrl: sig,
-    mediaType: 2,
-    description: wm, 
-    title: '👋 Hai, ' + name + ' ' + ucapan,
-    body: botdate,
-    thumbnail: await(await fetch(pp)).buffer(),
-    sourceUrl: sgc
-     }}
-  })
+    let ha = json.result
+	let row = Object.values(ha).map((v, index) => ({
+		title: index + ' ' + v.title,
+		description: '\nAuthor: ' + v.author + '\nUrl: ' + v.url,
+		rowId: usedPrefix + 'fetchsticker ' + (v.stickers).getRandom() + ' wsf'
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 handler.help = ['stickerly <teks>']
 handler.tags = ['sticker']
