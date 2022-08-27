@@ -70,7 +70,7 @@ let handler = async (m, { text, args, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
 let name = await conn.getName(who)
-
+if (!args[0]) throw 'Masukkan paramenter scraper'
 if (args[0] == 'android1') {
 
 }
@@ -165,7 +165,8 @@ if (args[0] == 'job') {
 
 }
 if (args[0] == 'joox') {
-
+let teks = await sjoox(args[1])
+m.reply(teks.lagu + teks.mp3)
 }
 if (args[0] == 'kiryu') {
 
@@ -199,7 +200,7 @@ if (args[0] == 'pinterest2') {
 }
 if (args[0] == 'quotes') {
 let teks = await squotes(args[1])
-m.reply(teks[0].quote)
+m.reply(teks.quote)
 }
 if (args[0] == 'randomgore') {
 
@@ -226,7 +227,18 @@ if (args[0] == 'soundcloud') {
 
 }
 if (args[0] == 'stickersearch') {
-
+let teks = await sstickersearch(args[1])
+	let row = Object.values(teks).map((v, index) => ({
+		title: index + ' ' + v.title,
+		description: '\nAuthor: ' + v.author + '\nUrl: ' + v.url,
+		rowId: usedPrefix + 'fetchsticker ' + (v.stickers).getRandom() + ' wsf'
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'textmakervid') {
 
