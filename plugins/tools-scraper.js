@@ -169,8 +169,8 @@ throw blum
 if (args[0] == 'carigc') {
 let teks = await scarigc(args[1])
 	let row = Object.values(teks).map((v, index) => ({
-		title: index + ' ' + v.nama,
-		description: '\nNama: ' + v.nama + '\nLink: ' + v.link,
+		title: index + ' *' + v.nama,
+		description: '\nNama: *' + v.nama + '\nLink: ' + v.link,
 		rowId: usedPrefix + 'inspect ' + v.link
 	}))
 	let button = {
@@ -218,17 +218,17 @@ throw blum
 }
 if (args[0] == 'ghuser') {
 let teks = await sghuser(args[1])
-return conn.sendButton(m.chat, `*Result: !*
-
-*${htjava} GH ${htjava}*
-*name:* ${teks.name}
-*thumb:* ${teks.thumb}
-
-*${htjava} LINK ${htjava}*
-*link:* ${teks.link}
-`, author, null, [
-                ['Next', usedPrefix + command + ' ' + args[0] + ' ' + args[1]],
-            ], m)
+let row = Object.values(teks).map((v, index) => ({
+		title: index + ' ' + teks.name,
+		description: '\nthumb: ' + v.thumb + '\nLink: ' + v.link,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'goredl') {
 throw blum
@@ -371,14 +371,27 @@ let row = Object.values(teks.data).map((v, index ) => ({
 	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'sfiledown') {
-throw blum
+let teks = await ssfiledown(args[1])
+return conn.sendButton(m.chat, `*Result: !*
+
+*judul:* ${teks.data.judul}
+*size:* ${teks.data.size}
+*type:* ${teks.data.type}
+*mime:* ${teks.data.mime}
+*desc:* ${teks.data.desc}
+*uploader:* ${teks.data.uploader}
+*uploaded:* ${teks.data.uploaded}
+*download_count:* ${teks.data.download_count}
+`, author, teks.data.link, [
+                ['GET', usedPrefix + 'get ' + teks.data.link],
+            ], m)
 }
 if (args[0] == 'sfilesearch') {
 let teks = await ssfilesearch(args[1])
 	let row = Object.values(teks).map((v, index ) => ({
 		title: index + ' ' + v.nama,
 		description: '\nNama: ' + v.nama + '\nSize: ' + v.size + '\nLink: ' + v.link,
-		rowId: usedPrefix + 'get ' + v.link
+		rowId: usedPrefix + command + ' sfiledown ' + v.link
 	}))
 	let button = {
 		buttonText: `☂️ ${command} Search Disini ☂️`,
@@ -388,7 +401,15 @@ let teks = await ssfilesearch(args[1])
 	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'soundcloud') {
-throw blum
+let teks = await ssoundcloud(args[1])
+return conn.sendButton(m.chat, `*Result: !*
+
+*judul:* ${teks.judul}
+*thumb:* ${teks.thumb}
+*download_count:* ${teks.download_count}
+`, author, teks.link, [
+                ['GET', usedPrefix + 'get ' + teks.link],
+            ], m)
 }
 if (args[0] == 'stickersearch') {
 let teks = await sstickersearch(args[1])
