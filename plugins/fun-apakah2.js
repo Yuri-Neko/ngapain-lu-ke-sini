@@ -1,7 +1,6 @@
 import fetch from 'node-fetch'
 import axios from 'axios'
 import cheerio from 'cheerio'
-import { stickersearch } from '../lib/scrape.js'
 
 let handler = async (m, { text, args, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -102,23 +101,7 @@ let ha = hox.hasil
 	return await conn.sendListM(m.chat, button, row, m)
 }
 
-if (command == 'stickersearch') {
-if (!text) throw `Use example .${command} pentol`
-let ssw = await stickersearch(text)
-	let row = Object.values(ssw).map((v, index) => ({
-		title: index + ' ' + ssw.title,
-		description: '\nUrl: ' + (v.url).getRandom(),
-		rowId: usedPrefix + 'get ' + (v.url).getRandom()
-	}))
-	let button = {
-		buttonText: `☂️ ${command} Search Disini ☂️`,
-		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
-		footerText: wm
-	}
-	return await conn.sendListM(m.chat, button, row, m)
 }
-
-}
-handler.command = ['apakah2', 'turu', 'tikporn', 'tbx', 'stickersearch']
+handler.command = ['apakah2', 'turu', 'tikporn', 'tbx']
 
 export default handler

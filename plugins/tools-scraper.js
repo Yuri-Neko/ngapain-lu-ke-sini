@@ -166,7 +166,18 @@ if (args[0] == 'job') {
 }
 if (args[0] == 'joox') {
 let teks = await sjoox(args[1])
-m.reply(teks.lagu + teks.mp3)
+let gg = teks.data
+	let row = Object.values(gg).map((v, index) => ({
+		title: index + ' ' + v.lagu,
+		description: '\nAlbum: ' + v.album + '\nPenyanyi: ' + v.penyanyi + '\nPublish: ' + v.publish + '\nImg: ' + v.img + '\nMp3: ' + v.mp3,
+		rowId: usedPrefix + 'get ' + v.mp3
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'kiryu') {
 
@@ -244,7 +255,8 @@ if (args[0] == 'textmakervid') {
 
 }
 if (args[0] == 'tiktok') {
-
+let teks = await stiktok(args[1])
+m.reply(teks.nowm + '\n' + teks.wm + '\n' teks.audio)
 }
 if (args[0] == 'trendtwit') {
 
