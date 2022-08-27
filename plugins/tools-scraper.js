@@ -76,19 +76,83 @@ if (args[0] == 'android1') {
 throw blum
 }
 if (args[0] == 'anime') {
-throw blum
+let teks = await sanime(args[1])
+	let row = Object.values(teks.result).map((v, index) => ({
+		title: index + ' ' + v.judul,
+		description: '\nThumb: ' + v.thumb + '\nLink: ' + v.link,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'anoboydl') {
-throw blum
+let teks = await sanoboydl(args[1])
+return conn.sendButton(m.chat, `*RESULT: !*
+
+*Judul:* ${teks.judul}
+*Uptime:* ${teks.uptime}
+*Link:* ${teks.direct_link}
+
+*${htjava} MFORU ${htjava}*
+*SD:* ${teks.mforu.SD}
+*HD:* ${teks.mforu.HD}
+
+*${htjava} ZIPPY ${htjava}*
+*SD:* ${teks.zippy.SD}
+*HD:* ${teks.zippy.HD}
+
+*${htjava} MIRROR ${htjava}*
+*SD:* ${teks.mirror.SD}
+*HD:* ${teks.mirror.HD}
+`, author, null, [
+                ['Next', usedPrefix + command + ' ' + args[0] + ' ' + args[1]],
+            ], m)
 }
 if (args[0] == 'anoboys') {
-throw blum
+let teks = await sanoboys(args[1])
+	let row = Object.values(teks.data).map((v, index) => ({
+		title: index + ' ' + v.judul,
+		description: '\nThumb: ' + v.thumb + '\nLink: ' + v.link,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'apkmirror') {
-throw blum
+let teks = await sapkmirror(args[1])
+	let row = Object.values(teks.data).map((v, index) => ({
+		title: index + ' ' + v.judul,
+		description: '\nDev: ' + v.dev + '\nSize: ' + v.size + '\nLink: ' + v.link + '\nVersion: ' + v.version + '\nuploaded_on: ' + v.uploaded_on + '\ndownload_count: ' + v.download_count,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'apkmody') {
-throw blum
+let teks = await sapkmody(args[1])
+	let row = Object.values(teks.data).map((v, index) => ({
+		title: index + ' ' + v.judul,
+		description: '\ninfomod: ' + v.infomod + '\nthumb: ' + v.thumb + '\nLink: ' + v.link,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'artinama') {
 throw blum
@@ -153,13 +217,35 @@ if (args[0] == 'ghfollowing') {
 throw blum
 }
 if (args[0] == 'ghuser') {
-throw blum
+let teks = await sghuser(args[1])
+return conn.sendButton(m.chat, `*Result: !*
+
+*${htjava} GH ${htjava}*
+*name:* ${teks.name}
+*thumb:* ${teks.thumb}
+
+*${htjava} LINK ${htjava}*
+*link:* ${teks.link}
+`, author, null, [
+                ['Next', usedPrefix + command + ' ' + args[0] + ' ' + args[1]],
+            ], m)
 }
 if (args[0] == 'goredl') {
 throw blum
 }
 if (args[0] == 'happymod') {
-throw blum
+let teks = await shappymod(args[1])
+	let row = Object.values(teks.data).map((v, index) => ({
+		title: index + ' ' + v.judul,
+		description: '\nrating: ' + v.rating + '\nthumb: ' + v.thumb + '\nLink: ' + v.link,
+		rowId: usedPrefix + 'ss ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'happymoddl') {
 throw blum
@@ -250,7 +336,15 @@ let teks = await squotes(args[1])
 m.reply(teks.quote)
 }
 if (args[0] == 'randomgore') {
-throw blum
+let teks = await srandomgore(args[1])
+return conn.sendButton(m.chat, `*Result: !*
+${teks.data.judul}
+${teks.data.views}
+${teks.data.comment}
+${teks.data.thumb}
+`, author, teks.data.link, [
+                ['GET', usedPrefix + 'get ' + teks.data.link],
+            ], m)
 }
 if (args[0] == 'randomtt') {
 throw blum
@@ -262,7 +356,18 @@ if (args[0] == 'rexdldown') {
 throw blum
 }
 if (args[0] == 'searchgore') {
-throw blum
+let teks = await ssearchgore(args[1])
+let row = Object.values(teks.data).map((v, index ) => ({
+		title: index + ' ' + v.judul,
+		description: '\nuploader: ' + v.uploader + '\nthumb: ' + v.thumb + '\nLink: ' + v.link,
+		rowId: usedPrefix + 'get ' + v.link
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'sfiledown') {
 throw blum
@@ -299,7 +404,15 @@ let teks = await sstickersearch(args[1])
 	return await conn.sendListM(m.chat, button, row, m)
 }
 if (args[0] == 'textmakervid') {
-throw blum
+let teks = await srandomgore(args[1], args[2])
+return conn.sendButton(m.chat, `*Result: !*
+${teks.url}
+
+List Style:
+0-5
+`, author, teks.url, [
+                ['GET', usedPrefix + 'get ' + teks.url],
+            ], m)
 }
 if (args[0] == 'tiktok') {
 let teks = await stiktok(args[1])
