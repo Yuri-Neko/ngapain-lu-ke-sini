@@ -3,16 +3,17 @@ import { format } from 'util'
 import { spawn } from 'child_process'
 
 // Font By MFarelS:V
-let fontPath = 'src/font/Zahraaa.ttf'
 let handler = async (m, { conn, args, text }) => {
     if (!global.support.convert &&
         !global.support.magick &&
         !global.support.gm) return handler.disabled = true // Disable if doesnt support
     let inputPath = 'src/kertas/magernulis1.jpg'
+    let fontPath = 'src/font/Zahraaa.ttf'
     let d = new Date()
     let tgl = d.toLocaleDateString('id-Id')
     let hari = d.toLocaleDateString('id-Id', { weekday: 'long' })
-    let teks = text.replace(/['.']/ig, '.\n')
+    let splitText = text.replace(/(\S+\s*){1,9}/g, '$&\n')
+    let teks = splitText.split('\n').slice(0, 31).join('\n')
     // conn.reply(m.chat, util.format({fontPath, inputPath, outputPath, tgl, hari, teks}), m)
     let bufs = []
     const [_spawnprocess, ..._spawnargs] = [...(global.support.gm ? ['gm'] : global.support.magick ? ['magick'] : []),

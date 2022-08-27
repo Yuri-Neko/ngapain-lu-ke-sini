@@ -1,76 +1,97 @@
 import { format } from 'util'
-// let path = require('path')
 import { spawn } from 'child_process'
 
-// Font By MFarelS:V
-let fontPath = 'src/font/Zahraaa.ttf'
-let handler = async (m, { conn, args }) => {
-    if (!global.support.convert &&
-        !global.support.magick &&
-        !global.support.gm) return handler.disabled = true // Disable if doesnt support
-    let inputPath = 'src/kertas/magernulis1.jpg'
-    let d = new Date
-    let tgl = d.toLocaleDateString('id-Id')
-    let hari = d.toLocaleDateString('id-Id', { weekday: 'long' })
-    let teks = args.join` `
-    // conn.reply(m.chat, util.format({fontPath, inputPath, outputPath, tgl, hari, teks}), m)
-    let bufs = []
-    const [_spawnprocess, ..._spawnargs] = [...(global.support.gm ? ['gm'] : global.support.magick ? ['magick'] : []),
-        'convert',
-        inputPath,
-        '-font',
-        fontPath,
-        '-fill',
-        'blue',
-        '-size',
-        '1024x784',
-        '-pointsize',
-        '20',
-        '-interline-spacing',
-        '1',
-        '-annotate',
-        '+806+78',
-        hari,
-        '-font',
-        fontPath,
-        '-fill',
-        'blue',
-        '-size',
-        '1024x784',
-        '-pointsize',
-        '18',
-        '-interline-spacing',
-        '1',
-        '-annotate',
-        '+806+102',
-        tgl,
-        '-font',
-        fontPath,
-        '-fill',
-        'blue',
-        '-size',
-        '1024x784',
-        '-pointsize',
-        '20',
-        '-interline-spacing',
-        '-7.5',
-        '-annotate',
-        '+344+142',
-        teks,
-        'jpg:-'
-    ]
-    spawn(_spawnprocess, _spawnargs)
-        .on('error', e => m.reply(format(e)))
-        .on('close', () => {
-            conn.sendFile(m.chat, Buffer.concat(bufs), 'nulis.jpg', 'Hati² ketahuan:v', m)
-        })
-        .stdout.on('data', chunk => bufs.push(chunk))
+let handler = async (m, { conn, text, args, command }) => {
+            let splitText = text.replace(/(\S+\s*){1,9}/g, '$&\n')
+            let teks = splitText.split('\n').slice(0, 31).join('\n')
+            let inputPath = 'src/kertas/magernulis1.jpg'
+            let fontPath = 'src/font/Zahraaa.ttf'
+            if (command == 'nuliskiri') {
+            spawn('convert', [
+                inputPath,
+                '-font',
+                fontPath,
+                '-size',
+                '960x1280',
+                '-pointsize',
+                '22',
+                '-interline-spacing',
+                '2',
+                '-annotate',
+                '+140+153',
+                teks,
+                inputPath
+            ])
+                .on('error', () => throw eror)
+                .on('exit', () => {
+                    conn.sendMessage(m.chat, { caption: 'Nih :>', image: fs.readFileSync(inputPath) }, { quoted: m, thumbnail: Buffer.alloc(0) })
+                })
+                }
+                if (command == 'nuliskanan') {
+            spawn('convert', [
+                inputPath,
+                '-font',
+                fontPath,
+                '-size',
+                '960x1280',
+                '-pointsize',
+                '23',
+                '-interline-spacing',
+                '2',
+                '-annotate',
+                '+128+129',
+                teks,
+                inputPath
+            ])
+                .on('error', () => throw eror)
+                .on('exit', () => {
+                    conn.sendMessage(m.chat, { caption: 'Nih :>', image: fs.readFileSync(inputPath) }, { quoted: m, thumbnail: Buffer.alloc(0) })
+                })
+                }
+                if (command == 'foliokiri') {
+            spawn('convert', [
+                inputPath,
+                '-font',
+                fontPath,
+                '-size',
+                '1720x1280',
+                '-pointsize',
+                '23',
+                '-interline-spacing',
+                '4',
+                '-annotate',
+                '+48+185',
+                teks,
+                inputPath
+            ])
+                .on('error', () => throw eror)
+                .on('exit', () => {
+                    conn.sendMessage(m.chat, { caption: 'Nih :>', image: fs.readFileSync(inputPath) }, { quoted: m, thumbnail: Buffer.alloc(0) })
+                })
+                }
+                if (command == 'foliokanan') {
+            spawn('convert', [
+                inputPath,
+                '-font',
+                fontPath,
+                '-size',
+                '960x1280',
+                '-pointsize',
+                '23',
+                '-interline-spacing',
+                '3',
+                '-annotate',
+                '+89+190',
+                teks,
+                inputPath
+            ])
+                .on('error', () => throw eror)
+                .on('exit', () => {
+                    conn.sendMessage(m.chat, { caption: 'Nih :>', image: fs.readFileSync(inputPath) }, { quoted: m, thumbnail: Buffer.alloc(0) })
+                })
+                }
 }
-handler.help = ['n'].map(v => v + 'ulis2 <teks>')
 handler.tags = ['tools']
-handler.command = /^nulis2$/i
+handler.command = ['nuliskiri', 'nuliskanan', 'foliokiri', 'foliokanan']
 
 export default handler
-
-// BY MFARELS
-// https://GitHub.com/MFarelS/
