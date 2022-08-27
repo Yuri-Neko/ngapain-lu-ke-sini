@@ -1,8 +1,12 @@
 import fetch from 'node-fetch'
 import axios from 'axios'
 import cheerio from 'cheerio'
+import { stickersearch } from '../lib/scrape.js'
 
-let handler = async (m, { text, args, command }) => {
+let handler = async (m, { text, args, usedPrefix, command }) => {
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
+let name = await conn.getName(who)
 if (command == 'apakah2') {
   if (!args[0]) throw `Use example .${command} halo`
   m.reply(`
@@ -23,27 +27,7 @@ keban = true
     }
 }
 if (command == 'tikporn') {
-if (!text) throw `Use example .${command} 1`
-let res = await tikporn(text)
-m.reply(`${res.title}
-${res.source}
-${res.thumb}
-${res.desc}
-${res.upload}
-${res.like}
-${res.dislike}
-${res.favorite}
-${res.views}
-${res.tags}
-${res.video}`)
-}
-}
-handler.command = ['apakah2', 'turu', 'tikporn']
-
-export default handler
-
-async function tikporn(rand) {
-axios.get('https://tikporntok.com/?random=' + rand)
+let puk = await axios.get('https://tikporntok.com/?random=1')
         .then((res) => {
             const $ = cheerio.load(res.data)
             let title = $('article > h1').text()
@@ -59,4 +43,82 @@ axios.get('https://tikporntok.com/?random=' + rand)
             let video = $('article > div.video-wrapper.vxplayer > div.vx_el').attr('src') || $('article > div.video-wrapper.vxplayer > div.vx_el').attr('data-src') || 'https://4.bp.blogspot.com/-hyMqjmQQq4o/W6al-Rk4IpI/AAAAAAAADJ4/m-lVBA_GC9Q5d4BIQg8ZO3fYmQQC3LqSACLcBGAs/s1600/404_not_found.png'
             return { title, source, thumb, desc, upload, like, dislike, favorite, views, tags, video }
         })
-        }
+        let lip = 'https://tikporntok.com/'
+        let lic = `*${htki} tikporntok.com ${htka}*
+*title:* ${puk.title}
+*source:* ${puk.source}
+*thumb:* ${lip + puk.thumb}
+*desc:* ${puk.desc}
+*upload:* ${puk.upload}
+*like:* ${puk.like}
+*dislike:* ${puk.dislike}
+*favorite:* ${puk.favorite}
+*views:* ${puk.views}
+*tags:* ${puk.tags}
+*video:* ${lip + puk.video}`
+        
+        try {
+await conn.sendButtonVid(m.chat, lip + puk.video, lic, author, 'To mp3', '.tomp3', fakes, adReply)
+} catch {
+throw 'Manaa Gk Adaa :>'
+}
+
+}
+
+if (command == 'tbx') {
+let hox = await axios.get(`https://turnbackhoax.id/`).then( tod => {
+const $ = cheerio.load(tod.data)
+let hasil = []
+$("figure.mh-loop-thumb").each(function(a, b) {
+$("div.mh-loop-content.mh-clearfix").each(function(c, d) {
+let link = $(d).find("h3.entry-title.mh-loop-title > a").attr('href');
+let img = $(b).find("img.attachment-mh-magazine-lite-medium.size-mh-magazine-lite-medium.wp-post-image").attr('src');
+let title = $(d).find("h3.entry-title.mh-loop-title > a").text().trim();
+let desc = $(d).find("div.mh-excerpt > p").text().trim();
+let date = $(d).find("span.mh-meta-date.updated").text().trim();
+const Data = {
+title: title,
+thumbnail: img,
+desc: desc,
+date: date,
+link: link
+}
+hasil.push(Data)
+})
+})
+return { hasil }
+})
+let ha = hox.hasil
+	let row = Object.values(ha).map((v, index) => ({
+		title: index + ' ' + v.title,
+		description: '\nDate: ' + v.date + '\nImg: ' + v.thumbnail + '\nDesc: ' + v.desc + '\nUrl: ' + v.link,
+		rowId: usedPrefix + 'get ' + v.thumbnail
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
+}
+
+if (command == 'stickersearch') {
+if (!text) throw `Use example .${command} pentol`
+let ssw = await stickersearch(text)
+	let row = Object.values(ssw).map((v, index) => ({
+		title: index + ' ' + ssw.title,
+		description: '\nUrl: ' + (v.url).getRandom(),
+		rowId: usedPrefix + 'get ' + (v.url).getRandom()
+	}))
+	let button = {
+		buttonText: `☂️ ${command} Search Disini ☂️`,
+		description: `⚡ ${name} Silakan pilih ${command} Search di tombol di bawah...\n*Teks yang anda kirim:* ${text}\n\nKetik ulang *${usedPrefix + command}* teks anda untuk mengubah teks lagi`,
+		footerText: wm
+	}
+	return await conn.sendListM(m.chat, button, row, m)
+}
+
+}
+handler.command = ['apakah2', 'turu', 'tikporn', 'tbx', 'stickersearch']
+
+export default handler

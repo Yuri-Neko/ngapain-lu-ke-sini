@@ -38,7 +38,7 @@ const listMessage = {
          }
        }
        if (chat.onephe) return
-       await conn.sendMessage(m.chat, { disappearingMessagesInChat: WA_DEFAULT_EPHEMERAL })
+       await conn.sendMessage(m.chat, { disappearingMessagesInChat: true })
        chat.onephe = !isEnable
        break
        case 'off':
