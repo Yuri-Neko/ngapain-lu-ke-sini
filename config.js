@@ -381,13 +381,13 @@ global.hwaifu = ['https://i.pinimg.com/originals/ed/34/f8/ed34f88af161e6278993e1
 'https://i.pinimg.com/originals/80/4f/1a/804f1a05f9996c96a2d492b4854b7fd5.jpg']
 
 /*Link*/
-global.sig = 'https://instagram.com/notifikasi_pemberitahuan'
-global.sgh = 'https://github.com/AyGemuy'
+global.sig = 'https://www.instagram.com/notifikasi_pemberitahuan'
+global.sgh = 'https://www.github.com/AyGemuy'
 global.sgc = 'https://chat.whatsapp.com/BAs2c2UeLE8AaI806UWUvI'
-global.sdc = 'https://discord.com/wudysoft'
-global.snh = 'https://tiktok.com/@upload_file'
-global.sfb = 'https://facebook.com/'
-global.syt = 'https://youtube.com/'
+global.sdc = 'https://www.discord.com/wudysoft'
+global.snh = 'https://www.tiktok.com/@upload_file'
+global.sfb = 'https://www.facebook.com/'
+global.syt = 'https://www.youtube.com/'
 
 /*Nsfw*/
 global.optsnsfw = true
