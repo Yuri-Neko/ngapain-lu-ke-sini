@@ -401,8 +401,8 @@ global.dpdf = 'application/pdf'
 global.drtf = 'text/rtf'
 
 /*Fake*/
-global.fsizedoc = '9'.repeat(9)
-global.fpagedoc = '9'.repeat(9)
+global.fsizedoc = '1'.repeat(10)
+global.fpagedoc = '1'.repeat(10)
 global.thumbdoc = 'https://telegra.ph/file/6e45318d7c76f57e4a8bd.jpg'
 
 /*Hiasan*/
@@ -429,8 +429,8 @@ global.htjava = '⫹⫺'
 /*Watermark*/
 global.stickpack = '.'
 global.stickauth = `☂︎ ʜɪɴᴀᴛᴀ-ʙᴏᴛ\n⫹⫺ 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩\nwa.me/${global.nomorbot}`
-global.packname = '☂︎ 𝐂𝐑𝐄𝐀𝐓𝐄𝐃 𝐁𝐘'
-global.author = 'ʜɪɴᴀᴛᴀ-ʙᴏᴛ X Wudysoft'
+global.packname = '☂︎ ᴄʀᴇᴀᴛᴇᴅ ʙʏ'
+global.author = '𝗛𝗶𝗻𝗮𝘁𝗮 乂 𝘄𝘂𝗱𝘆𝘀𝗼𝗳𝘁'
 global.multiplier = 10
 
 /*Pesan*/
