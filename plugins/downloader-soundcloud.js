@@ -45,7 +45,7 @@ let dapet = json.result.dlink
 }
 handler.help = ['soundcloud'].map(v => v + ' <url>')
 handler.tags = ['downloader']
-handler.command = /^(scloud|soundcloud)?$/i
+handler.command = /^s(oundcloud(d(own|l))?|cd(own|l))$/i
 
 handler.exp = 0
 handler.register = false

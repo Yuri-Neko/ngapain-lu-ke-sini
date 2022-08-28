@@ -1,4 +1,4 @@
-let handler = function (m, { conn, command }) {
+let handler = async (m, { conn, args, usedPrefix, command }) => {
 try {
     let { chat, fromMe, isBaileys } = m.quoted
     await conn.sendMessage(chat, { delete: m.quoted.vM.key })
@@ -18,6 +18,6 @@ try {
 handler.help = ['del', 'delete']
 handler.tags = ['tools']
 
-handler.command = /^del|d(elete|m)?$/i
+handler.command = /^d(el(ete|m)|el|fa)?$/i
 
 export default handler

@@ -18,7 +18,7 @@ return conn.send2ButtonLoc(m.chat, knimg, caption, wm + '\n\n' + botdate, ' All 
 }
 handler.help = ['runtime']
 handler.tags = ['info']
-handler.command = ['runtime', 'rt']
+handler.command = /^r(untime?|t)$/i
 export default handler
 
 function clockString(ms) {

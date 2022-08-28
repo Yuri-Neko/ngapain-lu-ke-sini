@@ -269,6 +269,6 @@ let images = `https://violetics.pw/api/jimp/tahta?apikey=beta&text=${teks}`
 
 }
 handler.help = ['ttpg', 'attpg', 'attpg2', 'quotex', 'tahta', 'ttp1', 'ttp2', 'ttp3', 'ttp4', 'ttp5', 'ttp6', 'ttp7', 'ttp8', 'attp1', 'attp2', 'hartacustom'].map(v => v + ' <text>')
-handler.command = ['ttpg', 'attpg', 'attpg2', 'quotex', 'tahta', 'ttp1', 'ttp2', 'ttp3', 'ttp4', 'ttp5', 'ttp6', 'ttp7', 'ttp8', 'attp1', 'attp2', 'hartacustom']
+handler.command = /^(hartacustom|attp(g2|[12])|quotex|attpg|t(ahta|tp[1-8g]))$/i
 handler.tags = ['sticker']
 export default handler

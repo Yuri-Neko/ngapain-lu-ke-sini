@@ -30,6 +30,6 @@ let dapet = json.result.url
 handler.help = ['facebook'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 
-handler.command = /^((facebook|fb)(downloder|dl)?)$/i
+handler.command = /^f(acebook(d(own(load(er)?)?|l))?|b(d(own(load(er)?)?|l))?)$/i
 
 export default handler

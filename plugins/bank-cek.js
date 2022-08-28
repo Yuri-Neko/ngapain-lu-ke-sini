@@ -15,7 +15,7 @@ let handler = async (m, { conn }) => {
 }
 handler.help = ['bank']
 handler.tags = ['rpg']
-handler.command = /^(bank)$/i
+handler.command = /^(bank(cek)?|cekbank)$/i
 
 handler.register = false
 export default handler

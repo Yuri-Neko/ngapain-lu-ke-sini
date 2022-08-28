@@ -11,6 +11,6 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 }
 handler.help = ['toimg2 (reply)']
 handler.tags = ['sticker']
-handler.command = ['toimg2']
+handler.command = /^t(oim(age|g)2|im(age|g)2)$/i
 
 export default handler

@@ -26,6 +26,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 }
 handler.help = ['cut'].map(v => v + ' <text>')
 handler.tags = ['audio']
-handler.command = /^cut$/i
+handler.command = /^(potong(audio|mp3)|cut(audio|mp3))$/i
 
 export default handler

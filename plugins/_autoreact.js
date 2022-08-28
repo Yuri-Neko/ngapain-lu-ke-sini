@@ -11,7 +11,7 @@ let em = res.emoji
           }})
   
   }
-handler.customPrefix = /(bilek|laik|banh|nihh|tytyd|anjir|dek)/i
+handler.customPrefix = /^(anjir|((bil|ad)e|dec)k|tytyd|laik|banh|nihh)$/i
 handler.command = new RegExp
   
 handler.mods = false

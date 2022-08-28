@@ -28,7 +28,7 @@ conn.sendMessage(m.chat, { document: { url: json.result.url }, fileName: json.re
 }
 handler.help = ['sfile']
 handler.tags = ['downloader']
-handler.command = /^(sfile)$/i
+handler.command = /^sfile(d(own(load)?|l))?$/i
 
 export default handler
 

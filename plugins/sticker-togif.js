@@ -13,8 +13,8 @@ if (!m.quoted) throw `balas stiker dengan caption *${usedPrefix + command}*`
     conn.sendFile(m.chat, out, 'out.gif', m, false, { mimetype: 'video/gif', thumbnail: Buffer.alloc(0) })
 }
 
-handler.help = ['togif (reply media)', 'tovideo <reply>']
+handler.help = ['togif (reply media)']
 handler.tags = ['sticker']
-handler.command = /^(togif|tovideo)$/i
+handler.command = /^togifs?$/i
 
 export default handler

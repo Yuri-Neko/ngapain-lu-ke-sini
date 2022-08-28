@@ -28,7 +28,7 @@ await soundcloud.download(args[0], CLIENT_ID).then(async (buff) => {
 handler.help = ['soundcloud'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 
-handler.command = /^(soundcloud)$/i
+handler.command = /^s(oundcloud(d(own|l)2|2)|cd(own|l)2)$/i
 
 export default handler
 

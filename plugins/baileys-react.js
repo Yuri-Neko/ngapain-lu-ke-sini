@@ -16,6 +16,6 @@ const react = new WAProto.ReactionMessage.create({})
 
 handler.help = ['react'].map(v => v + ' <emoji>')
 handler.tags = ['Baileys']
-handler.command = /^(react|reac|reak)$/i
+handler.command = /^rea(ct(ion)?|ksi)$/i
 
 export default handler

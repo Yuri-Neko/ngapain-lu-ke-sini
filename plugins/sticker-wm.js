@@ -32,6 +32,6 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 }
 handler.help = ['wm <packname>|<author>']
 handler.tags = ['sticker']
-handler.command = /^(wm)$/i
+handler.command = /^(s(ti(ck(erwn|wm)|k(er)?wm)|wm)|colong|wm)$/i
 
 export default handler

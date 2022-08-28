@@ -203,6 +203,5 @@ let handler = async (m, { conn, command, args, text }) => {
 }
 handler.help = ['nuliskiri', 'nuliskanan', 'foliokiri', 'foliokanan'].map(v => v + ' <teks>')
 handler.tags = ['nulis']
-handler.command = ['nuliskiri', 'nuliskanan', 'foliokiri', 'foliokanan']
-
+handler.command = /^(foliok(anan|iri)|nulisk(anan|iri))$/i
 export default handler

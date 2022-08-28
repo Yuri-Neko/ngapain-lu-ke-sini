@@ -14,7 +14,7 @@ let handler = async (m, { conn, args }) => {
 }
 handler.help = ['gdrive'].map(v => v + ' <url>')
 handler.tags = ['downloader']
-handler.command = /^(gdrive)$/i
+handler.command = /^gd(rive(d(own(load(er)?)?|l))?|dle|l)$/i
 
 export default handler
 

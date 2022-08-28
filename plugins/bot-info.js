@@ -52,7 +52,7 @@ let handler = async (m, { conn, usedPrefix, __dirname, text, command }) => {
   let neww = performance.now()
   let speed = neww - old
     conn.sendHydrated(m.chat, 
-    '*––––––『 BOT INFO 』––––––*', 
+    htki + ' BOT INFO ' + htka, 
 `🤖 ɴᴀᴍᴇ: ${_package.name}
 🧩 ᴠᴇʀsɪᴏɴ: ${_package.version}
 📚 ʟɪʙʀᴀʀʏ: ${_package.description}
@@ -80,7 +80,7 @@ let handler = async (m, { conn, usedPrefix, __dirname, text, command }) => {
 }
 handler.help = ['botinfo']
 handler.tags = ['info']
-handler.command = /^(botinfo|bot|info|bi)$/i
+handler.command = /^(bot(info)?|infobot)$/i
 
 export default handler
 

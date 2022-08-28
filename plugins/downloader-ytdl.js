@@ -37,7 +37,7 @@ return conn.sendMessage(m.chat, listMessage, { quoted: fgif  })
 
 handler.help = ['ytd']
 handler.tags = ['downloader']
-handler.command = /^ytd(v|a|mp4|mp3)?$/i
+handler.command = /^ytd(mp[34]|[av])?$/i
 handler.exp = 3
 
 export default handler

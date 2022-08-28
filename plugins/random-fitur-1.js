@@ -269,7 +269,7 @@ if (command == 'stimker') {
             let row = Object.keys(lis, lisn).map((v, index) => ({
 		title: htjava + ' ' + lisn[v] + ' Sticker',
 		description: 'By ' + wm,
-		rowId: usedPrefix + 'fetchsticker ' + lis[v] + ' wsf'
+		rowId: usedPrefix + 'get ' + lis[v]
 	}))
 	let button = {
 		buttonText: `☂️ Tema Disini ☂️`,

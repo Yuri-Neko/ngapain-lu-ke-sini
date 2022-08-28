@@ -37,7 +37,7 @@ try {
 }
 handler.help = ['mediafire'].map(v => v + ' <url>')
 handler.tags = ['downloader']
-handler.command = /^(mediafire|mf)$/i
+handler.command = /^m(ediafire(d(own(load(er)?)?|l))?|f(d(own(load(er)?)?|l))?)$/i
 
 handler.limit = true
 

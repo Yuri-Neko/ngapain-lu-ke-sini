@@ -34,6 +34,6 @@ let res = await fetch(`https://api.lolhuman.xyz/api/cocofun?apikey=${global.lolk
 handler.help = ['cocofun'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 
-handler.command = /^((cocofun)(downloder|dl)?)$/i
+handler.command = /^c(oco(fun(d(own(load(er)?)?|l))?|d(own(load(er)?)?|l))|cfun(d(own(load(er)?)?|l))?)$/i
 
 export default handler

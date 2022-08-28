@@ -23,7 +23,7 @@ let dapet = json.result.sticker
 }
 handler.help = ['linestick'].map(v => v + ' <url>')
 handler.tags = ['downloader']
-handler.command = /^(linestick|linesticker)?$/i
+handler.command = /^(s((ti(cker|k)lines|linedl)|ti(cker|k)line)|linesti(ck(dl|er)|k))$/i
 
 handler.exp = 0
 handler.register = false

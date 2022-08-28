@@ -40,7 +40,7 @@ let stiker = false
 //lo mau apa??
 handler.help = ['tovideo']
 handler.tags = ['tools']
-handler.command = /^to((vid)eo|mp4)$/i
+handler.command = /^t(o(vid(eos?|s)?|mp4)|vid(eos?|s)?|mp4)$/i
 
 export default handler
 
